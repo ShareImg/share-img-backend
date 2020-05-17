@@ -1,7 +1,13 @@
 import express from 'express'
 
+import usersRouter from './routes/User'
+import photoRouter from './routes/Photo'
+
 const app = express()
 const port = process.env.PORT || 3000
+
+app.use('/users', usersRouter);
+app.use('/photo', photoRouter);
 
 app.get('/', (req, res) => res.send('Hello World'))
 
