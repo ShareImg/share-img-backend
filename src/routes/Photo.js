@@ -3,7 +3,7 @@ import express from 'express'
 const router = express.Router();
 
 // Example code
-router.get('/photo', async(req, res) => {
+router.get('/', async(req, res) => {
   res.send('Photo routes')
 })
 
