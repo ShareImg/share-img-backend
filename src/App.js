@@ -1,4 +1,6 @@
 import express from 'express'
+// import mysql from 'mysql'
+import mysqlconnect from './connection'
 
 import usersRouter from './routes/User'
 import photoRouter from './routes/Photo'
