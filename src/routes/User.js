@@ -4,10 +4,11 @@ import bcrypt from 'bcrypt'
 
 const router = express.Router();
 
-const validateEmail = (email) => {
-  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-}
+// not use
+// const validateEmail = (email) => {
+//   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//   return re.test(email);
+// }
 
 const hashPassword = async (password) => {
   return await bcrypt.hash(password, 10)
@@ -31,18 +32,6 @@ router.get('/:userId', async(req, res) => {
   mysqlconnect.query("SELECT * from Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
     if(!err){
       res.send(results);
-    }
-    else{
-      console.log(err);
-    }
-  })
-})
-
-// delete an user
-router.delete('/:userId', async(req, res) => {
-  mysqlconnect.query("DELETE FROM Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
-    if(!err){
-      res.send('Deleted succesfully');
     }
     else{
       console.log(err);
@@ -93,9 +82,50 @@ router.post('/register', async(req, res) => {
       res.send(422, err);
     }
     else{
-      res.send(200,'user registered sucessfully');
+      res.send(200, users);
     }
   })
 })
+
+// delete an user
+router.delete('/delete/:userId', async(req, res) => {
+  mysqlconnect.query("DELETE FROM Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
+    if(!err){
+      res.send('Deleted succesfully');
+    }
+    else{
+      console.log(err);
+    }
+  })
+})
+
+// edit user
+router.put('/edit/:userId', async (req, res) => {
+  var param=[{
+    "displayName": req.body.displayName,
+    "password": req.body.password,
+    "email": req.body.email,
+    "displayImage": req.body.displayImage,
+    "uid": req.body.uid,
+  }, req.query.userId]
+  mysqlconnect.query("UPDATE Users SET ? WHERE id = ?", param, (err, results, fields) =>{
+    if(!err){
+      res.send(200, param);
+    }
+    else{
+      console.log(err);
+    }
+  })
+})
+
+// register validate not created
+// router.post('/register/validate', async (req, res) => {
+//   const data = req.body
+//   let error = {}
+
+//   if (!data.displayName) {
+//     error.displayName = 'This field is required'
+//   }
+// })
 
 export default router;
