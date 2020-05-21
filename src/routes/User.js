@@ -1,5 +1,6 @@
 import express from 'express'
 import mysqlconnect from '../connection'
+import bcrypt from 'bcrypt'
 
 const router = express.Router();
 
@@ -76,14 +77,12 @@ router.post('/register', async(req, res) => {
     "displayImage":req.body.displayImage,
     "uid": req.body.uid,
   }
-
   mysqlconnect.query("INSERT INTO Users SET ?", users, (err, results, fields) =>{
     if(err){
       res.send(422, err);
     }
     else{
-      console.log("success", results.userId)
-      // res.send(200,'user registered sucessfully');
+      res.send(200, users);
     }
   })
 })
@@ -111,7 +110,7 @@ router.put('/edit/:userId', async (req, res) => {
   }, req.query.userId]
   mysqlconnect.query("UPDATE Users SET ? WHERE id = ?", param, (err, results, fields) =>{
     if(!err){
-      res.send('Edited succesfully');
+      res.send(200, param);
     }
     else{
       console.log(err);
