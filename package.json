@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.681.0",
+    "bcrypt": "^4.0.1",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.7-alpha.3",
     "mysql": "^2.18.1"
   },
   "devDependencies": {

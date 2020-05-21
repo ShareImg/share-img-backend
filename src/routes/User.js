@@ -1,5 +1,6 @@
 import express from 'express'
 import mysqlconnect from '../connection'
+import bcrypt from 'bcrypt'
 
 const router = express.Router();
 
@@ -87,7 +88,6 @@ router.post('/register', async(req, res) => {
     "displayImage":req.body.displayImage,
     "uid": req.body.uid,
   }
-
   mysqlconnect.query("INSERT INTO Users SET ?", users, (err, results, fields) =>{
     if(err){
       res.send(422, err);
@@ -96,16 +96,6 @@ router.post('/register', async(req, res) => {
       res.send(200,'user registered sucessfully');
     }
   })
-})
-
-// register validate
-router.post('/register/validate', async (req, res) => {
-  const data = req.body
-  let error = {}
-
-  if (!data.displayName) {
-    error.displayName = 'This field is required'
-  }
 })
 
 export default router;

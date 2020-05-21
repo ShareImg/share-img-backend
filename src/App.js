@@ -1,4 +1,6 @@
 import express from 'express'
+import fileUpload from 'express-fileupload'
+
 // import mysql from 'mysql'
 import mysqlconnect from './connection'
 
@@ -6,10 +8,13 @@ import usersRouter from './routes/User'
 import photoRouter from './routes/Photo'
 
 const app = express()
+app.use(express.json());
 const port = process.env.PORT || 3000
 
 app.use('/user', usersRouter);
 app.use('/photo', photoRouter);
+app.use(fileUpload({ createParentPath: true, useTempFiles: true }))
+
 
 app.get('/', (req, res) => res.send('Hello World'))
 

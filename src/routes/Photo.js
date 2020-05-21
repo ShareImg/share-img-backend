@@ -1,5 +1,6 @@
 import express from 'express'
 import mysqlconnect from '../connection'
+// import * as s3 from '../s3'
 
 const router = express.Router();
 
@@ -23,6 +24,10 @@ router.get('/', async(req, res) => {
       console.log(err);
     }
   })
+})
+
+router.post('/upload', async(req, res) => {
+  
 })
 
 // Code here
