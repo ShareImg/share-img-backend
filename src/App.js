@@ -1,5 +1,6 @@
 import express from 'express'
 import fileUpload from 'express-fileupload'
+import cors from 'cors'
 // import multer from 'multer'
 // import multers3 from 'multer-s3'
 
@@ -11,7 +12,7 @@ import usersRouter from './routes/User'
 import photoRouter from './routes/Photo'
 
 const app = express()
-
+app.use(cors())
 app.use(express.json());
 const port = process.env.PORT || 3000
 
@@ -29,7 +30,6 @@ const port = process.env.PORT || 3000
 //   })
 // });
 // const upload = multer();
-
 app.use('/user', usersRouter);
 app.use('/photo', photoRouter);
 app.use(fileUpload({ createParentPath: true, useTempFiles: true }))

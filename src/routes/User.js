@@ -68,6 +68,7 @@ router.post('/login', async(req, res) => {
 
 // register
 router.post('/register', async(req, res) => {
+  console.log('in')
   const password = req.body.password;
   const encryptedPassword = await hashPassword(password);
   const users={
