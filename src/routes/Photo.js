@@ -40,7 +40,7 @@ router.get('/:photoId', async(req, res) => {
   })
 })
 
-router.get('/:ownerId', async(req, res) => {
+router.get('/owner/:ownerId', async(req, res) => {
   mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL AND ownerId = ?", [req.params.ownerId], (err, results, fields) => {
     if(!err){
       res.send(200, results)
