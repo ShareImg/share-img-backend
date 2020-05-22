@@ -31,7 +31,7 @@ router.get('/', async(req, res) => {
 router.get('/:userId', async(req, res) => {
   mysqlconnect.query("SELECT * from Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
     if(!err){
-      res.send(results);
+      res.send(results[0]);
     }
     else{
       console.log(err);
