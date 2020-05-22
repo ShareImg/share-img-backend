@@ -56,7 +56,8 @@ router.post('/upload', async(req, res) => {
   const photo = {
     "description": req.body.description,
     "url": req.body.url,
-    "ownerName": req.body.ownerName
+    "ownerName": req.body.ownerName,
+    "ownerId": req.body.ownerId
   }
   mysqlconnect.query("INSERT INTO Photos SET ?", photo, (err, results) =>{
     if(err){
