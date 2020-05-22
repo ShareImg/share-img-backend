@@ -108,7 +108,7 @@ router.put('/edit/:userId', async (req, res) => {
     "displayImage": req.body.displayImage,
     "uid": req.body.uid,
   }, req.query.userId]
-  mysqlconnect.query("UPDATE Users SET ? WHERE id = ?", param, (err, results, fields) =>{
+  mysqlconnect.query("UPDATE Users SET ? WHERE uid = ?", param, (err, results, fields) =>{
     if(!err){
       res.send(200, param);
     }
