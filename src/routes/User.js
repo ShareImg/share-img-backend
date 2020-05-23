@@ -1,6 +1,6 @@
 import express from 'express'
 import mysqlconnect from '../connection'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const router = express.Router();
 
@@ -29,7 +29,11 @@ router.get('/', async(req, res) => {
 
 // Get an users
 router.get('/:userId', async(req, res) => {
-  mysqlconnect.query("SELECT * from Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
+  mysqlconnect.query("SELECT Users.id, displayName, password, email, displayImage, uid, Photos.id, url, ownerName, description, description, createdAt, updatedAt, ownerId\
+  FROM shareimg.Users \
+  Left join shareimg.Photos on shareimg.Users.Id = shareimg.Photos.ownerId\
+  where uid = ? OR Users.id = ?",
+  [req.params.userId,req.params.userId] , (err, results, fields) =>{
     if(!err){
       res.send(results[0]);
     }
