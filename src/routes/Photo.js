@@ -78,9 +78,8 @@ router.get('/:photoId', async(req, res) => {
 })
 
 router.get('/owner/:ownerId', async(req, res) => {
-  mysqlconnect.query("SELECT Photos.id, Photos.url, Photos.ownerName, Photos.description, Photos.description, Photos.createdAt, Photos.updatedAt, Photos.ownerId, Users.id, uid, displayName\
-  FROM Photos \
-  Left join Users on ? = Users.id;", [req.params.ownerId], (err, results, fields) => {
+  mysqlconnect.query("SELECT * FROM shareimg.Users \
+  join shareimg.Photos on shareimg.Users.Id = ?", [req.params.ownerId], (err, results, fields) => {
     if(!err){
       res.send(results)
     }
