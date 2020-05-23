@@ -19,7 +19,7 @@ const validateUrl = (str) => {
 }
 
 router.get('/', async(req, res) => {
-  mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL", (err, rows, fields) =>{
+  mysqlconnect.query("SELECT * from Photos", (err, rows, fields) =>{
     if(!err){
       res.send(rows);
     }

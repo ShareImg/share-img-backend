@@ -29,7 +29,7 @@ router.get('/', async(req, res) => {
 
 // Get an users
 router.get('/:userId', async(req, res) => {
-  mysqlconnect.query("SELECT * from Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
+  mysqlconnect.query("SELECT * from Users WHERE uid = ? OR id = ?",[req.params.userId,req.params.userId] , (err, results, fields) =>{
     if(!err){
       res.send(results[0]);
     }
@@ -90,7 +90,7 @@ router.post('/register', async(req, res) => {
 
 // delete an user
 router.delete('/delete/:userId', async(req, res) => {
-  mysqlconnect.query("DELETE FROM Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
+  mysqlconnect.query("DELETE FROM Users WHERE id = ?",[req.params.userId] , (err, results, fields) =>{
     if(!err){
       res.send('Deleted succesfully');
     }
