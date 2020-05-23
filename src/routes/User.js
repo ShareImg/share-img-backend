@@ -94,7 +94,7 @@ router.post('/register', async(req, res) => {
 
 // delete an user
 router.delete('/delete/:userId', async(req, res) => {
-  mysqlconnect.query("DELETE FROM Users WHERE uid = ?",[req.params.userId] , (err, results, fields) =>{
+  mysqlconnect.query("DELETE FROM Users WHERE id = ?",[req.params.userId] , (err, results, fields) =>{
     if(!err){
       res.send('Deleted succesfully');
     }
