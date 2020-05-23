@@ -30,9 +30,9 @@ router.get('/', async(req, res) => {
 })
 
 router.get('/:photoId', async(req, res) => {
-  mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL AND id = ?", [req.params.photoId], (err, results, fields) => {
+  mysqlconnect.query("SELECT * from Photos WHERE id = ?", [req.params.photoId], (err, results, fields) => {
     if(!err){
-      res.send(200, results[0])
+      res.send(results[0])
     }
     else{
       res.send(400, 'Photo not found')
@@ -41,9 +41,9 @@ router.get('/:photoId', async(req, res) => {
 })
 
 router.get('/owner/:ownerId', async(req, res) => {
-  mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL AND ownerId = ?", [req.params.ownerId], (err, results, fields) => {
+  mysqlconnect.query("SELECT * from Photos WHERE ownerId = ?", [req.params.ownerId], (err, results, fields) => {
     if(!err){
-      res.send(200, results)
+      res.send(results)
     }
     else{
       res.send(400, 'Photo not found')
@@ -64,13 +64,13 @@ router.post('/upload', async(req, res) => {
       res.send(422, err);
     }
     else{
-      res.send(200, photo);
+      res.send(photo);
     }
   })
 })
 
 router.put('/edit/:photoId', async(req, res) => {
-  mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL AND id = ?", [req.params.photoId], (err, results, fields) =>{
+  mysqlconnect.query("SELECT * from Photos WHERE id = ?", [req.params.photoId], (err, results, fields) =>{
     if(!err){
       const photo = results[0]
       const param = [{
@@ -78,7 +78,7 @@ router.put('/edit/:photoId', async(req, res) => {
       }, req.params.photoId]
       mysqlconnect.query("UPDATE Photos SET ? WHERE id = ?", param, (err, results) =>{
         if(!err){
-          res.send(200, photo);
+          res.send(results);
         }
         else{
           res.send(422, err);
@@ -93,12 +93,9 @@ router.put('/edit/:photoId', async(req, res) => {
 })
 
 router.delete('/delete/:photoId', async(req, res) => {
-  const param=[{
-    "deletedAt": new Date(),
-  }, req.params.photoId]
-  mysqlconnect.query("SELECT * from Photos WHERE deletedAt IS NULL AND id = ?", [req.params.photoId], (err, results, fields) =>{
+  mysqlconnect.query("DELETE FROM Photos WHERE id = ?", [req.params.photoId], (err, results, fields) =>{
     if(!err){
-      res.send('Deleted photo successfully');
+      res.send(200, 'Deleted photo successfully');
     }
     else{
       console.log(err);
