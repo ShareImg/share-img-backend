@@ -55,7 +55,8 @@ function checkFileType( file, cb ){
  }
 
 router.get('/', async(req, res) => {
-  mysqlconnect.query("SELECT * from Photos", (err, rows, fields) =>{
+  mysqlconnect.query("SELECT * FROM shareimg.Users \
+  join shareimg.Photos on shareimg.Users.Id = shareimg.Photos.ownerId", (err, rows, fields) =>{
     if(!err){
       res.send(rows);
     }
