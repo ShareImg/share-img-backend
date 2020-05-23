@@ -29,8 +29,7 @@ router.get('/', async(req, res) => {
 
 // Get an users
 router.get('/:userId', async(req, res) => {
-  mysqlconnect.query("SELECT Users.id, displayName, password, email, displayImage, uid, Photos.id, url, ownerName, description, description, createdAt, updatedAt, ownerId\
-  FROM shareimg.Users \
+  mysqlconnect.query("SELECT * FROM shareimg.Users \
   Left join shareimg.Photos on shareimg.Users.Id = shareimg.Photos.ownerId\
   where uid = ? OR Users.id = ?",
   [req.params.userId,req.params.userId] , (err, results, fields) =>{
