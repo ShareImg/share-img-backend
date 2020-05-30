@@ -12,14 +12,14 @@ import mysqlconnect from './connection'
 import usersRouter from './routes/User'
 import photoRouter from './routes/Photo'
 
+dotenv.config()
 const app = express()
 app.use(cors())
 app.use(express.json());
-dotenv.config()
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 
 app.get('/', async(req, res) => {
-  res.send(200)
+  res.send('server running')
 })
 app.use('/user', usersRouter);
 app.use('/photo', photoRouter);
