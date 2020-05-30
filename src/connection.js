@@ -14,6 +14,7 @@ mysqlconnect.connect(function (err) {
         console.log("Connected")
     }
     else{
+        console.log('error', process.env.DB_HOST)
         console.log("Connection Failed")
     }
 });  
