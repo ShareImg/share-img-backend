@@ -2,17 +2,16 @@ import express from 'express'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import dotenv from 'dotenv'
+dotenv.config()
 // import multer from 'multer'
 // import multers3 from 'multer-s3'
 
 // import mysql from 'mysql'
-import mysqlconnect from './connection'
 // import s3 from './s3'
 
 import usersRouter from './routes/User'
 import photoRouter from './routes/Photo'
 
-dotenv.config()
 const app = express()
 app.use(cors())
 app.use(express.json());
