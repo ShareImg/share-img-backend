@@ -1,7 +1,7 @@
 import express from 'express'
 import fileUpload from 'express-fileupload'
 import cors from 'cors'
-import { } from 'dotenv/config'
+import dotenv from 'dotenv'
 // import multer from 'multer'
 // import multers3 from 'multer-s3'
 
@@ -15,6 +15,7 @@ import photoRouter from './routes/Photo'
 const app = express()
 app.use(cors())
 app.use(express.json());
+dotenv.config()
 const port = process.env.PORT || 3000
 
 app.get('/', async(req, res) => {
