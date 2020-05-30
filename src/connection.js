@@ -1,12 +1,11 @@
 var mysql = require('mysql');
 var mysqlconnect = mysql.createConnection({
-    host: "database-shareimg.cpefds2e0ni6.us-east-1.rds.amazonaws.com",
-    user: "root",
-    password: "shareimg",
-    database: "shareimg"
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
 });
 
-mysqlconnect.connect(function (err) {
+mysqlconnect.connect(function (err) {    
     if (!err){
         console.log("Connected")
     }
