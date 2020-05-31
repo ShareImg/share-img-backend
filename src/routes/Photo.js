@@ -91,37 +91,9 @@ router.get('/owner/:ownerId', async(req, res) => {
 
 
 router.post('/upload', async(req, res) => {
-  // ImgUpload( req, res, ( error ) => {
-  //   // console.log( 'requestOkokok', req.file );
-  //   // console.log( 'error', error );
-  //   if( error ){
-  //    console.log( 'errors', error );
-  //    res.json( { error: error } );
-  //   } else {
-  //    // If File not found
-  //    if( req.file === undefined ){
-  //     console.log( 'Error: No File Selected!' );
-  //     res.json( 'Error: No File Selected' );
-  //    } else {
-  //       const photo = {
-  //         "description": req.body.description,
-  //         "url": req.body.url,
-  //         "ownerName": req.body.ownerName,
-  //         "ownerId": req.body.ownerId
-  //       }
-  //       mysqlconnect.query("INSERT INTO Photos SET ?", photo, (err, results) =>{
-  //         if(err){
-  //           res.send(422, err);
-  //         }
-  //         else{
-  //           res.send(200, photo);
-  //         }
-  //       })
-  //     }
   const photo = {
     "description": req.body.description,
     "url": req.body.url,
-    "ownerName": req.body.ownerName,
     "ownerId": req.body.ownerId
   }
   mysqlconnect.query("INSERT INTO Photos SET ?", photo, (err, results) =>{
