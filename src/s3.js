@@ -1,10 +1,10 @@
 
 import AWS from 'aws-sdk'
 
-const BUCKET = 'shareimg-bucket'
-const REGION = 'us-east-1'
-const ACCESS_KEY = 'ASIA2X75E2CZECFVIL43'
-const SECRET_KEY = 'JfQpPygc8sWCAkGqKcNjhqzTaZAfuWLO+tYI9gwg'
+const BUCKET = process.env.BUCKET;
+const REGION = process.env.REGION;
+const ACCESS_KEY = process.env.ACCESS_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const localImage = './cat.png'
 const imageRemoteName = `catImage_${new Date().getTime()}.png`
